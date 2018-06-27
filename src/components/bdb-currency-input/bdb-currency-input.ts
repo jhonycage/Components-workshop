@@ -1,5 +1,5 @@
 
-import { Component, Input, Output, EventEmitter, forwardRef, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input,  forwardRef, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BdbMaskProvider } from '../../providers/bdb-mask/bdb-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
