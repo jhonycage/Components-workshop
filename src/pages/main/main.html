@@ -15,8 +15,10 @@
 
 <ion-content padding>
   <h4> Formularios Reactivos y No reactivos</h4>
-  <bdb-currency-input [placeHolder]="'Ingrese Monto'" [(ngModel)]="monto"></bdb-currency-input>
-  {{monto}}
+  <bdb-currency-input [placeHolder]="'Ingrese Monto'" [(mFocused)]="isFocus" (mFocusedChange)="cardSelectedAction($event)" [(ngModel)]="monto"></bdb-currency-input>
+  {{monto}} --- 
+  <p >{{isFocus}}</p>
+  
   <h4>ANGULAR GENERICO</h4>
   <pulse-workshop-card [title]="'Titulo'" [subtitle]="'Subtitulo'" (selected)="cardSelectedAction($event)"></pulse-workshop-card>
   <h4>IONIC</h4>
@@ -27,5 +29,5 @@
   [icon]="'https://www.lomasnuevo.net/wp-contentupl/2013/11/logoVisa.jpg'"
   (clickCard)="executeEmit()"  >
   </pulse-bank-card>
-  <h5> {{cardStatus}}</h5>
+  <h5 (click)="isFocus=true"> {{cardStatus}}</h5>
 </ion-content>

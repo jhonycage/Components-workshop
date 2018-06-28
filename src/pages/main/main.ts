@@ -17,12 +17,18 @@ export class MainPage {
   public cardStatus:string;
   isBancardACtive:boolean;
   monto;
+  public isFocus;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MainPage');
+  }
+
+  ionViewDidEnter(){
+    this.isFocus=true;
+
   }
   cardSelectedAction(event){
     this.cardStatus=`la carta esta ${(event?'Seleccinada':'No Seleccionada')}`;
@@ -34,4 +40,6 @@ export class MainPage {
     this.cardStatus=`la tarjeta ${(this.isBancardACtive ?'Seleccinada':'No Seleccionada')}`;
     console.log(`la tarjeta${(this.isBancardACtive ?'Seleccinada':'No Seleccionada')}`, this.isBancardACtive );
   }
+
+  
 }

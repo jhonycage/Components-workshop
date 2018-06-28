@@ -1,5 +1,5 @@
 
-import { Component, Input,  forwardRef, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input,  forwardRef, OnInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BdbMaskProvider } from '../../providers/bdb-mask/bdb-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
@@ -13,6 +13,8 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
   type="tel"
   [placeholder]="placeHolder"
   (input)="onInputChange($event)"
+  (blur) = "mFocused = false"
+  (focus) = "mFocused = true"
   [value]="inputValue"
   [textMask]="{mask: customMask, guide: false}"
   #curInput>
@@ -43,9 +45,33 @@ export class BdbCurrencyInputComponent implements ControlValueAccessor, OnInit {
   ngOnInit(){
     this.customMask = createNumberMask({});
   }
+  
+  private mFocus : boolean;
+ 	
+ 	@Output() mFocusedChange= new EventEmitter();
+     set mFocused(mFocused: boolean){
+        this.mFocus=mFocused;
+        console.log("mFocused o", mFocused,this.mFocus)
+        if(mFocused){
+          console.log("mFocused oi", mFocused,this.mFocus)
+          
+          this.inputElement.nativeElement.focus();
+        }
+        this.mFocusedChange.emit(this.mFocus);
+    }
+    @Input('mFocused')
+    get mFocused(){
+        return this.mFocus;
+    }
 
   public setFocus(){
     this.inputElement.nativeElement.focus();
+  }
+
+  onBlur(){
+    console.log("mFocused b", this.mFocused, this.mFocus)
+
+    this.mFocused = false ;
   }
 
   setDisabledState(isDisabled: boolean){
